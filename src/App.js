@@ -50,10 +50,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Chessboard position={game.fen()} onPieceDrop={onDrop} />
+      <Chessboard position={game.fen()} onPieceDrop={onDrop} boardWidth={getWidth()}/>
       </header>
     </div>
   );
+}
+
+function getWidth(){
+  if(window.innerHeight < window.innerWidth / 2) return window.innerHeight - 10;
+  if(window.innerWidth < 400) return window.innerWidth - 10;
+  return window.innerWidth / 2 - 10
 }
 
 export default App;
