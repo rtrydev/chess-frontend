@@ -27,7 +27,7 @@ function App() {
   }
 
   function getMoveFromEngine(){
-    fetch('http://89.71.84.37:8080/Chess/GetNextMove?fen=' + game.fen())
+    fetch('http://localhost:8080/Chess/GetNextMove?fen=' + game.fen())
     .then(res => res.json())
     .then((data) => safeGameMutate((game) => {
       game.move(data.moveUCI, { sloppy: true })
