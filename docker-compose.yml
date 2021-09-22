@@ -1,0 +1,33 @@
+version: "3.6"
+
+services:
+  api:
+    container_name: api-chess
+    restart: unless-stopped
+    tty: true
+    build:
+      context: ./ChessEngine/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+  frontend:
+    container_name: frontend-chess
+    restart: unless-stopped
+    tty: true
+    build:
+      context: ./rboard/
+      dockerfile: Dockerfile.prod
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local
